@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Equilibrium Lab – Per menti ad alta complessità</title>
+  <title>Equilibrium Lab | Capacità alta, continuità fragile</title>
+  <meta name="description" content="Laboratorio indipendente sulla continuità esecutiva per menti ad alta complessità. Neuroscienze, metodo e strumenti interattivi.">
+  <meta property="og:title" content="Equilibrium Lab | Capacità alta, continuità fragile">
+  <meta property="og:description" content="Modello e ricerca sulla continuità esecutiva: energia, motivazione, controllo, decisione, chiusura.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lety059.github.io/Equilibrium-Lab/index.html">
+  <meta property="og:image" content="https://lety059.github.io/Equilibrium-Lab/assets/images/og-cover.jpg">
   <meta name="description" content="Un laboratorio che studia perché alcune menti ad alta capacità cognitiva incontrano difficoltà nella continuità operativa. Modello scientifico e strumenti pratici.">
   <link rel="stylesheet" href="assets/css/palette.css">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -11,28 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-flex">
-      <a href="index.html" class="logo">
-        <span class="logo-name">Equilibrium Lab</span>
-        <span class="logo-tagline">Capacità alta, continuità fragile</span>
-      </a>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="fenomeno.html">Fenomeno</a></li>
-          <li><a href="mente-sistemica.html">Mente sistemica</a></li>
-          <li><a href="ciclo-cognitivo.html">Ciclo</a></li>
-          <li><a href="neurobiologia.html">Neurobiologia</a></li>
-          <li><a href="metodo.html">Modello</a></li>
-          <li><a href="strumenti.html">Strumenti</a></li>
-          <li><a href="osservatorio.html">Osservatorio</a></li>
-          <li><a href="laboratorio.html">Laboratorio</a></li>
-          <li><a href="partecipa.html">Partecipa</a></li>
-          <li><a href="chi-siamo.html">Chi siamo</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <div data-include="header"></div>
 
   <main>
     <!-- Hero principale -->
@@ -98,17 +83,14 @@
     <!-- Frase dinamica -->
     <section class="frase-dinamica" style="background: var(--primary); color: white; padding: 3rem 0; text-align: center;">
       <div class="container">
-        <p id="random-phrase" class="frase" style="font-size: 1.6rem; font-family: var(--font-serif); font-style: italic;">Caricamento...</p>
+    <p id="random-phrase" class="frase" style="font-size: 1.6rem; font-family: var(--font-serif); font-style: italic;">La soglia è dove tutto inizia.</p>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <p>© 2026 Equilibrium Lab. Con supervisione scientifica (Dott.ssa Marianna Perfetto). <a href="perimetro.html" style="color: white;">Perimetro e limiti</a>.</p>
-    </div>
-  </footer>
+  <div data-include="footer"></div>
 
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/includes.js" defer></script>
 </body>
 </html>

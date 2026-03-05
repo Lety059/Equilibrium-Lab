@@ -1,0 +1,10 @@
+:root {
+  --primary: #0A2A44;
+  --accent: #C6A43F;
+  --bg: #F9F9F9;
+  --text: #2E2E2E;
+  --light-gray: #E5E5E5;
+  --white: #FFFFFF;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+}

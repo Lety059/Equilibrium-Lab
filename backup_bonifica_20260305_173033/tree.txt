@@ -1,0 +1,66 @@
+.
+├── architetture
+│   ├── body-doubling.html
+│   ├── chiusura-protetta.html
+│   ├── index.html
+│   ├── low-friction-start.html
+│   ├── rituali-transizione.html
+│   ├── salienza-visiva.html
+│   └── timer-chiusura.html
+├── assets
+│   ├── css
+│   │   ├── palette.css
+│   │   ├── responsive.css
+│   │   └── style.css
+│   ├── images
+│   ├── includes
+│   └── js
+│       ├── dashboard.js
+│       ├── header.js
+│       ├── lang.js
+│       ├── main.js
+│       └── metrics.js
+├── chi-siamo.html
+├── ciclo-cognitivo.html
+├── come-reagisco-al-blocco.html
+├── contatti.html
+├── dashboard.html
+├── en
+│   ├── about.html
+│   ├── architetture
+│   ├── assets -> ../assets
+│   ├── chi-siamo
+│   ├── favicon.ico -> ../favicon.ico
+│   ├── fondamenti
+│   ├── framework.html
+│   ├── index.html
+│   └── metodo
+├── esperienze.html
+├── favicon.ico
+├── fenomeno.html
+├── fondamenti
+│   └── glossario.html
+├── il-mio-blocco-finale.html
+├── index.html
+├── laboratorio.html
+├── manifesto.html
+├── metodo.html
+├── muro-90.html
+├── neurobiologia.html
+├── osservatorio.html
+├── partecipa.html
+├── perimetro.html
+├── pianificatore-blocchi.html
+├── riflessioni
+│   ├── 01-blocco-90.html
+│   ├── 04-modello-energetico.html
+│   ├── 05-adhd-creativita.html
+│   ├── 06-adhd-biologia.html
+│   └── index.html
+├── robots.txt
+├── sitemap.xml
+├── strumenti.html
+├── task-decomposer.html
+└── tree.txt
+
+15 directories, 49 files
