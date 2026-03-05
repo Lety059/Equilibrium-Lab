@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Il Muro del 90% – Equilibrium Lab</title>
+  <meta name="description" content="Un'esperienza interattiva per esplorare il blocco del 90%: quando manca l'ultimo passo ma non riesci a chiudere.">
+  <link rel="stylesheet" href="assets/css/palette.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    .muro-page {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, var(--primary) 0%, #0a2a44 100%);
+      color: white;
+      padding: 2rem;
+    }
+    .muro-container {
+      text-align: center;
+      max-width: 700px;
+      cursor: pointer;
+    }
+    .muro-wall {
+      width: 100%;
+      max-width: 400px;
+      height: 200px;
+      background-color: var(--accent);
+      /* Texture a mattoni */
+      background-image: 
+        linear-gradient(45deg, rgba(0,0,0,0.2) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(0,0,0,0.2) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.2) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(0,0,0,0.2) 75%);
+      background-size: 40px 40px;
+      background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+      margin: 2rem auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      transition: height 1s ease-in-out;
+    }
+    /* Sovrapposizione scura per simulare l'ombra quando cresce */
+    .muro-wall::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: rgba(0,0,0,0.3);
+      transition: height 1s ease-in-out;
+      pointer-events: none;
+    }
+    .muro-wall.growing {
+      height: 400px;
+    }
+    .muro-wall.growing::after {
+      height: 100%;
+    }
+    .muro-messages {
+      font-size: 1.4rem;
+      line-height: 1.6;
+      margin: 2rem 0;
+      min-height: 150px;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+    .muro-messages.show {
+      opacity: 1;
+    }
+    .muro-message {
+      display: none;
+    }
+    .muro-message.active {
+      display: block;
+    }
+    .muro-cta {
+      margin-top: 2rem;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .muro-cta.show {
+      opacity: 1;
+    }
+    .muro-cta a {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 1rem 2rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 0.5rem 1rem;
+      transition: 0.2s;
+    }
+    .muro-cta a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    .muro-cta a.outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: white;
+    }
+    .instruction {
+      font-size: 1rem;
+      opacity: 0.7;
+      margin-top: 1rem;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-flex">
+      <a href="index.html" class="logo">
+        <span class="logo-name">Equilibrium Lab</span>
+        <span class="logo-tagline">Capacità alta, continuità fragile</span>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="manifesto.html">Manifesto</a></li>
+          <li><a href="metodo.html">Metodo</a></li>
+          <li><a href="architetture/">Architetture</a></li>
+          <li><a href="neurobiologia.html">Neurobiologia</a></li>
+          <li><a href="esperienze.html">Esperienze</a></li>
+          <li><a href="muro-90.html">Muro 90%</a></li>
+        <li><a href="riflessioni/index.html">Riflessioni</a></li>
+          <li><a href="chi-siamo.html">Chi siamo</a></li>
+          <li><a href="contatti.html">Contatti</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="muro-page">
+    <div class="muro-container" onclick="nextMessage()">
+      <div class="muro-wall" id="wall"></div>
+      <div class="muro-messages" id="messages">
+        <div class="muro-message active">Clicca sul muro per iniziare.</div>
+        <div class="muro-message">«Fare il primo 90% mi costa poca fatica.»</div>
+        <div class="muro-message">«L'ultimo 10% può durare settimane.»</div>
+        <div class="muro-message">«È quasi finito, ma non riesco a chiudere.»</div>
+        <div class="muro-message">«La pressione autoindotta cresce.»</div>
+        <div class="muro-message">«So che è sufficiente, ma non mi fido.»</div>
+        <div class="muro-message">«Ti sei mai sentito così?»</div>
+      </div>
+      <div class="muro-cta" id="cta">
+        <a href="esperienze.html#blocco-90">Scopri le esperienze</a>
+        <a href="task-decomposer.html" class="outline">Prova il Task Decomposer</a>
+      </div>
+      <div class="instruction">(clicca ancora per continuare)</div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Equilibrium Lab. Con supervisione scientifica (Dott.ssa Marianna Perfetto). <a href="perimetro.html">Perimetro e limiti</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    let step = 0;
+    const wall = document.getElementById('wall');
+    const messages = document.querySelectorAll('.muro-message');
+    const messagesContainer = document.getElementById('messages');
+    const cta = document.getElementById('cta');
+
+    function nextMessage() {
+      if (step < messages.length - 1) {
+        messages[step].classList.remove('active');
+        step++;
+        messages[step].classList.add('active');
+        if (step === 1) wall.classList.add('growing');
+        messagesContainer.classList.add('show');
+      } else if (step === messages.length - 1) {
+        // Ultimo messaggio: mostra CTA
+        cta.classList.add('show');
+        // Disabilita ulteriori click sull'area (opzionale)
+        document.querySelector('.muro-container').onclick = null;
+      }
+    }
+  </script>
+</body>
+</html>
