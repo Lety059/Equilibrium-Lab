@@ -3,14 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="keywords" content="ADHD adulto, funzioni esecutive, blocco del 90%, regolazione cognitiva, continuità esecutiva, neurobiologia, executive function training">
-  <title>Equilibrium Lab – Per adulti competenti con continuità fragile</title>
-  <meta name="description" content="Un progetto nato dall'esperienza diretta dell'ADHD e delle performance elevate, con supervisione scientifica. Modelli, strumenti e architetture per chi vuole capire il proprio funzionamento e lavorare senza esplodere.">
+  <title>Equilibrium Lab – Per menti ad alta complessità</title>
+  <meta name="description" content="Un laboratorio che studia perché alcune menti ad alta capacità cognitiva incontrano difficoltà nella continuità operativa. Modello scientifico e strumenti pratici.">
   <link rel="stylesheet" href="assets/css/palette.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="site-header">
@@ -37,9 +35,10 @@
   </header>
 
   <main>
+    <!-- Hero principale -->
     <section class="hero">
       <div class="container">
-        <h1>Capacità alta, <span class="accent">continuità fragile</span></h1>
+        <h1>Capacità alta. <span class="accent">Continuità fragile.</span></h1>
         <p class="hero-sub">
           Un progetto nato dall'esperienza diretta dell'ADHD e delle performance elevate,<br>
           con la supervisione scientifica di una psicoterapeuta.
@@ -55,49 +54,58 @@
       </div>
     </section>
 
-    <section style="text-align: center; margin: 4rem 0;">
-    <h2>Come vuoi usare Equilibrium Lab?</h2>
-    <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
-      <a href="#" class="card" style="padding: 2rem; min-width: 250px; text-decoration: none; color: inherit;">
-        <h3 style="color: var(--primary);">Sono un professionista</h3>
-        <p>Voglio capire il mio funzionamento e trovare strumenti.</p>
-      </a>
-      <a href="#" class="card" style="padding: 2rem; min-width: 250px; text-decoration: none; color: inherit;">
-        <h3 style="color: var(--primary);">Sostengo professionisti</h3>
-        <p>Cerco strumenti basati su evidenze per il mio lavoro.</p>
-      </a>
-    </div>
-  </section>
-    <section class="pilastri">
+    <!-- Modello Equilibrium preview -->
+    <section style="padding: 4rem 0; background: var(--white);">
+      <div class="container" style="text-align: center;">
+        <h2>Il modello Equilibrium</h2>
+        <p style="max-width: 700px; margin: 1rem auto;">
+          Il comportamento cognitivo emerge dall'interazione di cinque sistemi: 
+          <strong>energia, motivazione, controllo esecutivo, decisione e chiusura dell'azione</strong>.
+          Quando questi sistemi perdono sincronizzazione può emergere instabilità nella continuità operativa.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 2rem 0;">
+          <span style="background: var(--primary); color: white; padding: 0.5rem 1.5rem; border-radius: 40px;">Energia</span>
+          <span style="background: var(--primary); color: white; padding: 0.5rem 1.5rem; border-radius: 40px;">Motivazione</span>
+          <span style="background: var(--primary); color: white; padding: 0.5rem 1.5rem; border-radius: 40px;">Controllo</span>
+          <span style="background: var(--primary); color: white; padding: 0.5rem 1.5rem; border-radius: 40px;">Decisione</span>
+          <span style="background: var(--primary); color: white; padding: 0.5rem 1.5rem; border-radius: 40px;">Chiusura</span>
+        </div>
+        <a href="metodo.html" style="color: var(--accent); font-weight: 600;">Scopri il modello completo →</a>
+      </div>
+    </section>
+
+    <!-- Tre card di navigazione rapida -->
+    <section class="pilastri" style="padding: 4rem 0;">
       <div class="container grid-3">
         <div class="card">
           <h2>Manifesto</h2>
-          <p>Perché esiste Equilibrium Lab. Il paradosso degli adulti ad alta competenza, e perché il problema non sei tu.</p>
+          <p>Perché esiste Equilibrium Lab. Il paradosso degli adulti ad alta competenza.</p>
           <a href="manifesto.html" class="card-link">Leggi →</a>
         </div>
         <div class="card">
           <h2>Metodo</h2>
-          <p>Come funziona il ciclo reale: blocco, iperfocus, crash, recupero. E i meccanismi che lo governano.</p>
+          <p>Il ciclo reale: blocco, iperfocus, crash, recupero e i meccanismi che lo governano.</p>
           <a href="metodo.html" class="card-link">Scopri →</a>
         </div>
         <div class="card">
           <h2>Architetture</h2>
-          <p>Modelli operativi e protocolli che abbiamo costruito per noi, e che ora condividiamo.</p>
+          <p>Modelli operativi e protocolli che abbiamo costruito per la continuità esecutiva.</p>
           <a href="architetture/" class="card-link">Esplora →</a>
         </div>
       </div>
     </section>
 
-    <section class="frase-dinamica">
+    <!-- Frase dinamica -->
+    <section class="frase-dinamica" style="background: var(--primary); color: white; padding: 3rem 0; text-align: center;">
       <div class="container">
-        <p id="random-phrase" class="frase">Caricamento...</p>
+        <p id="random-phrase" class="frase" style="font-size: 1.6rem; font-family: var(--font-serif); font-style: italic;">Caricamento...</p>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="container">
-      <p>© 2026 Equilibrium Lab. Con supervisione scientifica (Dott.ssa Marianna Perfetto). <a href="perimetro.html">Perimetro e limiti</a>.</p>
+      <p>© 2026 Equilibrium Lab. Con supervisione scientifica (Dott.ssa Marianna Perfetto). <a href="perimetro.html" style="color: white;">Perimetro e limiti</a>.</p>
     </div>
   </footer>
 
