@@ -3,12 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pianificatore a blocchi – Equilibrium Lab</title>
-  <meta name="description" content="Strumento per organizzare la giornata in blocchi di attività, riducendo il carico decisionale.">
+  <title>Equilibrium Lab | Pianificatore a blocchi</title>
+  <meta name="description" content="Struttura la giornata in macro-blocchi per ridurre il carico decisionale.">
   <link rel="stylesheet" href="assets/css/palette.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+  <div data-include="header"></div>
+
+  <main class="container" style="max-width: 800px; padding: 3rem 0;">
+    <h1>Pianificatore a blocchi</h1>
+    <p class="hero-sub">Organizza la tua giornata in 3-5 macro‑attività. Riduci l'affaticamento decisionale e favorisci la continuità.</p>
+
+    <div style="background: var(--white); padding: 2rem; border-radius: 16px; margin: 2rem 0;">
+      <div id="task-inputs">
+        <input type="text" id="task1" placeholder="Attività 1 (es. Scrittura)" style="width:100%; margin-bottom:1rem; padding:0.8rem; border-radius:8px; border:1px solid var(--light-gray);">
+        <input type="text" id="task2" placeholder="Attività 2 (es. Riunioni)" style="width:100%; margin-bottom:1rem; padding:0.8rem; border-radius:8px; border:1px solid var(--light-gray);">
+        <input type="text" id="task3" placeholder="Attività 3 (es. Lettura)" style="width:100%; margin-bottom:1rem; padding:0.8rem; border-radius:8px; border:1px solid var(--light-gray);">
+        <input type="text" id="task4" placeholder="Attività 4 (opzionale)" style="width:100%; margin-bottom:1rem; padding:0.8rem; border-radius:8px; border:1px solid var(--light-gray);">
+      </div>
+      <button id="generate-btn" style="background:var(--accent); color:var(--primary); border:none; padding:1rem 2rem; border-radius:40px; font-weight:600; cursor:pointer;">Genera pianificazione</button>
+    </div>
+
+    <div id="output" style="display:none; background:var(--light-gray); padding:2rem; border-radius:16px;"></div>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="assets/js/includes.js" defer></script>
+  <script>
+    document.getElementById('generate-btn').addEventListener('click', () => {
+      const tasks = [];
+      for (let i=1; i<=4; i++) {
+        const val = document.getElementById(`task${i}`).value.trim();
+        if (val) tasks.push(val);
+      }
+      if (tasks.length === 0) {
+        alert('Inserisci almeno un\'attività');
+        return;
+      }
+
+      let html = '<h3>La tua giornata a blocchi</h3><ul style="list-style:none; padding:0;">';
+      const start = 9;
+      tasks.forEach((task, i) => {
+        const oraInizio = start + i * 2;
+        html += `<li style="margin:1rem 0; padding:1rem; background:white; border-radius:8px;"><strong>${oraInizio}:00 – ${oraInizio+2}:00</strong> – ${task}</li>`;
+      });
+      html += '</ul><p>Buon lavoro!</p>';
+      document.getElementById('output').innerHTML = html;
+      document.getElementById('output').style.display = 'block';
+    });
+  </script>
+</body>
+</html>

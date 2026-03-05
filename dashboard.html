@@ -3,73 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard dell'Energia – Equilibrium Lab</title>
-  <meta name="description" content="Traccia quotidianamente energia, focus e chiusure. Visualizza i trend e scopri i tuoi pattern.">
+  <title>Equilibrium Lab | Dashboard Energia</title>
+  <meta name="description" content="Traccia quotidianamente energia, focus e chiusure. Visualizza i trend nel tempo.">
   <link rel="stylesheet" href="assets/css/palette.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-  <style>
-    .tracker-form { background: var(--white); padding: 2rem; border-radius: 12px; margin: 2rem 0; }
-    .form-group { margin-bottom: 1.5rem; }
-    label { display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--primary); }
-    input[type="range"] { width: 100%; }
-    .range-value { display: inline-block; margin-left: 1rem; font-weight: 600; color: var(--accent); }
-    button { background: var(--accent); color: var(--white); border: none; padding: 0.8rem 2rem; border-radius: 40px; font-weight: 600; cursor: pointer; transition: 0.2s; }
-    button:hover { opacity: 0.9; transform: translateY(-2px); }
-    .chart-container { margin: 3rem 0; height: 300px; }
-    .recent-entries { background: var(--light-gray); padding: 1.5rem; border-radius: 12px; }
-    .entry-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #ccc; }
-    .entry-date { font-weight: 600; }
-  </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div data-include="header"></div>
 
-  <main class="container" style="padding: 3rem 0; max-width: 1000px;">
+  <main class="container" style="max-width: 800px; padding: 3rem 0;">
     <h1>Dashboard dell'Energia</h1>
-    <p class="hero-sub" style="text-align: left;">Monitora ogni giorno i tuoi livelli di energia, focus e quante volte sei riuscito a chiudere un'attività senza crash. I dati restano solo sul tuo dispositivo.</p>
+    <p class="hero-sub">Registra ogni giorno i tuoi livelli e scopri i tuoi pattern cognitivi.</p>
 
-    <!-- Box evidenza scientifica (psicoterapeuta) -->
-    <div style="background: var(--white); padding: 1rem; border-left: 4px solid var(--accent); margin: 2rem 0; font-size: 0.95rem;">
-      <p><strong>Supervisione scientifica:</strong> i parametri di questa dashboard sono basati sul modello energetico di Sergeant e sulla curva catecolaminergica di Arnsten. L'interpretazione dei trend è supervisionata dalla psicoterapeuta del progetto.</p>
-    </div>
-
-    <!-- Form di inserimento -->
-    <div class="tracker-form">
-      <h2>Inserisci i dati di oggi</h2>
-      <div class="form-group">
-        <label for="energy">Energia percepita (1-10): <span id="energy-val" class="range-value">5</span></label>
-        <input type="range" id="energy" min="1" max="10" value="5" oninput="document.getElementById('energy-val').innerText = this.value">
+    <div style="background: var(--white); padding: 2rem; border-radius: 16px; margin: 2rem 0;">
+      <div style="margin-bottom:1.5rem;">
+        <label>Energia (1-10) <span id="energy-val">5</span></label>
+        <input type="range" id="energy" min="1" max="10" value="5" oninput="document.getElementById('energy-val').innerText=this.value">
       </div>
-      <div class="form-group">
-        <label for="focus">Focus (1-10): <span id="focus-val" class="range-value">5</span></label>
-        <input type="range" id="focus" min="1" max="10" value="5" oninput="document.getElementById('focus-val').innerText = this.value">
+      <div style="margin-bottom:1.5rem;">
+        <label>Focus (1-10) <span id="focus-val">5</span></label>
+        <input type="range" id="focus" min="1" max="10" value="5" oninput="document.getElementById('focus-val').innerText=this.value">
       </div>
-      <div class="form-group">
-        <label for="closures">Chiusure completate (senza crash): <span id="closures-val" class="range-value">0</span></label>
-        <input type="range" id="closures" min="0" max="10" value="0" oninput="document.getElementById('closures-val').innerText = this.value">
+      <div style="margin-bottom:1.5rem;">
+        <label>Chiusure (0-10) <span id="closures-val">0</span></label>
+        <input type="range" id="closures" min="0" max="10" value="0" oninput="document.getElementById('closures-val').innerText=this.value">
       </div>
-      <button id="save-btn">Salva giornata</button>
+      <button id="save-btn" style="background:var(--accent); color:var(--primary); border:none; padding:1rem 2rem; border-radius:40px; font-weight:600; cursor:pointer;">Salva giornata</button>
     </div>
 
-    <!-- Grafico dei trend (canvas) -->
-    <div class="chart-container">
-      <canvas id="trend-chart"></canvas>
+    <div style="height:300px; margin:2rem 0;">
+      <canvas id="chart"></canvas>
     </div>
 
-    <!-- Ultimi 7 giorni -->
-    <div class="recent-entries">
-      <h3>Ultimi 7 giorni</h3>
-      <div id="entries-list"></div>
-    </div>
+    <div id="last-entries" style="background:var(--light-gray); padding:1.5rem; border-radius:12px;"></div>
   </main>
 
   <div data-include="footer"></div>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="assets/js/dashboard.js"></script>
   <script src="assets/js/includes.js" defer></script>
+  <script>
+    const STORAGE_KEY = 'energy_dashboard';
+    let chart;
+
+    function getEntries() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    }
+
+    function saveEntry(energy, focus, closures) {
+      const entries = getEntries();
+      const today = new Date().toISOString().slice(0,10);
+      const idx = entries.findIndex(e => e.date === today);
+      const newEntry = { date: today, energy, focus, closures };
+      if (idx >= 0) entries[idx] = newEntry;
+      else entries.push(newEntry);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries.slice(-30)));
+      return entries;
+    }
+
+    function updateUI(entries) {
+      // Lista ultimi 7 giorni
+      const list = document.getElementById('last-entries');
+      const last7 = entries.slice(-7).reverse();
+      list.innerHTML = '<h3>Ultimi 7 giorni</h3>';
+      if (last7.length === 0) list.innerHTML += '<p>Nessun dato ancora.</p>';
+      else {
+        const ul = document.createElement('ul');
+        ul.style.listStyle = 'none';
+        last7.forEach(e => {
+          const li = document.createElement('li');
+          li.style.padding = '0.5rem 0';
+          li.innerHTML = `<strong>${e.date}</strong> – Energia ${e.energy}, Focus ${e.focus}, Chiusure ${e.closures}`;
+          ul.appendChild(li);
+        });
+        list.appendChild(ul);
+      }
+
+      // Grafico
+      if (entries.length === 0) return;
+      const labels = entries.map(e => e.date.slice(5));
+      const energyData = entries.map(e => e.energy);
+      const focusData = entries.map(e => e.focus);
+      const closuresData = entries.map(e => e.closures);
+
+      if (chart) chart.destroy();
+      const ctx = document.getElementById('chart').getContext('2d');
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            { label: 'Energia', data: energyData, borderColor: '#0A2A44', tension: 0.2 },
+            { label: 'Focus', data: focusData, borderColor: '#C6A43F', tension: 0.2 },
+            { label: 'Chiusure', data: closuresData, borderColor: '#2E2E2E', tension: 0.2 }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 10 } } }
+      });
+    }
+
+    document.getElementById('save-btn').addEventListener('click', () => {
+      const energy = parseInt(document.getElementById('energy').value);
+      const focus = parseInt(document.getElementById('focus').value);
+      const closures = parseInt(document.getElementById('closures').value);
+      const entries = saveEntry(energy, focus, closures);
+      updateUI(entries);
+      alert('Dati salvati!');
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateUI(getEntries());
+    });
+  </script>
 </body>
 </html>
